@@ -1,0 +1,57 @@
+fragment UserFields on User {
+  id
+  name
+  projects {
+    createdAt
+    deadline
+    deletedAt
+    goalTime
+    id
+    name
+    totalTime
+    updatedAt
+  }
+}
+
+fragment ProjectFields on Project {
+  createdAt
+  deadline
+  deletedAt
+  goalTime
+  id
+  name
+  totalTime
+  updatedAt
+  user {
+    id
+    name
+  }
+}
+
+query UserByName($name: String!) {
+  userByName(name: $name) {
+    ...UserFields
+  }
+}
+
+mutation CreateUser($input: MutationUser!) {
+  createUser(input: $input) {
+    ...UserFields
+  }
+}
+
+mutation CreateProject($input: MutationProject!) {
+  createProject(input: $input) {
+    ...ProjectFields
+  }
+}
+
+mutation UpdateProject($id: ID!, $input: MutationProject!) {
+  updateProject(id: $id, input: $input) {
+    ...ProjectFields
+  }
+}
+
+mutation DeleteProject($id: ID!) {
+  deleteProject(id: $id)
+}

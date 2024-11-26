@@ -1,0 +1,16 @@
+overwrite: true
+schema: "http://localhost:8080/query" # GraphQL API のスキーマ
+documents: "src/graphql/**/*.graphql" # クエリやマウテーションのファイル
+generates:
+  src/generated/graphql.tsx: # 出力先ファイル
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      scalars:
+        DateTime: string
+        Time: string
